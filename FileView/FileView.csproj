@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net8.0-windows;net462</TargetFrameworks>
+
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+</Project>
