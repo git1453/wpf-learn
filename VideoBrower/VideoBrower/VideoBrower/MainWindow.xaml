@@ -1,0 +1,58 @@
+﻿<Window x:Class="VideoBrower.MainWindow"
+        Name="window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VideoBrower" xmlns:media="clr-namespace:MoviePlayerControlLibrary;assembly=MoviePlayerControlLibrary"
+        xmlns:videoBrowser="clr-namespace:VideoBrowser"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <!--<videoBrowser:FileToURIConverter x:Key="MyConverter">
+
+        </videoBrowser:FileToURIConverter>
+        <DataTemplate x:Key="imageTemplate">
+            <Border VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Padding="4" Margin="2" 
+                    Background="White">
+                <Image Source="{Binding Converter={StaticResource MyConverter}}" />
+            </Border>
+        </DataTemplate>-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary1.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <videoBrowser:FileToURIConverter x:Key="MyConverter"/>
+                <DataTemplate x:Key="imageTemplate">
+                <Border VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Padding="4" Margin="2" 
+                        Background="White">
+                    <Image Source="{Binding Converter={StaticResource MyConverter}}" />
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <Grid Name="grid1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="125" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Margin="0" Name="grid2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="115" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="selectFolderButton" Click="selectFolderButton_Click">选择文件</Button>
+            <ListBox Grid.Column="1" Margin="0,0,0,0" 
+                     Name="videoListBox" 
+                     SelectionChanged ="videoListBox_SelectionChanged"
+                     ItemTemplate="{StaticResource imageTemplate}"
+                     ItemsSource="{Binding ElementName=window1, Path=Thumbnails}" />
+        </Grid>
+        <media:MoviePlayerControl x:Name="moviePlayer" Grid.Row="1" />
+    </Grid>
+</Window>
